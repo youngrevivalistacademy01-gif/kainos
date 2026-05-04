@@ -1,0 +1,194 @@
+:root {
+    --deep-black: #050505;
+    --nigeria-green: #008751;
+    --gold: #c5a059;
+    --pearl: #e0e0e0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--deep-black);
+    color: var(--pearl);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Background Effects */
+#fogCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.cinematic-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.9) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Layout */
+.screen-section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    z-index: 2;
+}
+
+/* Section 1: Massive Countdown */
+.top-label {
+    letter-spacing: 10px;
+    font-size: 0.8rem;
+    color: var(--nigeria-green);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+#countdown-timer {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.t-unit { text-align: center; }
+
+.t-unit span {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 12vw, 8rem);
+    font-weight: 900;
+    line-height: 1;
+    display: block;
+    text-shadow: 0 0 50px rgba(0, 135, 81, 0.3);
+}
+
+.t-unit p {
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    margin-top: 10px;
+    opacity: 0.5;
+}
+
+/* Section 2: Insight */
+.insight-content {
+    max-width: 700px;
+    text-align: center;
+}
+
+.gold-text {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    letter-spacing: 8px;
+    margin-bottom: 2rem;
+}
+
+.insight-text {
+    font-size: 1.5rem;
+    font-weight: 100;
+    line-height: 1.8;
+    letter-spacing: 1px;
+}
+
+.insight-text span {
+    color: var(--nigeria-green);
+    font-weight: 600;
+}
+
+/* Section 3: The Portal */
+.registration-portal {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.portal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    letter-spacing: 15px;
+    margin-bottom: 3rem;
+}
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.input-wrapper input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 15px 0;
+    color: white;
+    font-size: 1.2rem;
+    outline: none;
+    transition: 0.4s;
+}
+
+.input-wrapper label {
+    position: absolute;
+    left: 0; top: 15px;
+    pointer-events: none;
+    transition: 0.4s;
+    letter-spacing: 3px;
+    font-size: 0.7rem;
+    opacity: 0.4;
+}
+
+.input-wrapper input:focus ~ label,
+.input-wrapper input:not(:placeholder-shown) ~ label {
+    top: -20px;
+    opacity: 1;
+    color: var(--nigeria-green);
+}
+
+.glory-btn {
+    width: 100%;
+    padding: 25px;
+    background: transparent;
+    border: 1px solid var(--nigeria-green);
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+.glory-btn:hover {
+    background: var(--nigeria-green);
+    box-shadow: 0 0 50px rgba(0, 135, 81, 0.5);
+}
+
+/* Scroll Hint */
+.scroll-hint {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 4px;
+    opacity: 0.6;
+}
+
+.mouse-icon {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--nigeria-green), transparent);
+    margin: 10px auto;
+    animation: scrollLine 2s infinite;
+}
+
+@keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+}

@@ -1,0 +1,290 @@
+:root {
+    --deep-emerald: #002e1a;
+    --nigeria-green: #008751;
+    --pearl: #fdfdfd;
+    --gold-glow: rgba(212, 175, 55, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--deep-emerald);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--pearl);
+    overflow: hidden; /* We'll control scroll via JS or keep it single-page cinematic */
+}
+
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Loader Logic */
+.loader {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.loader-title {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    letter-spacing: 20px;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeIn 1.5s forwards 0.5s;
+}
+
+/* Hero UI */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    z-index: 1;
+    position: relative;
+}
+
+.vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 4px;
+    font-weight: 600;
+}
+
+.hero-main {
+    text-align: center;
+    z-index: 2;
+}
+
+.glitch-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(5rem, 18vw, 12rem);
+    letter-spacing: 30px;
+    color: var(--pearl);
+    text-shadow: 0 0 30px var(--gold-glow);
+    margin: 20px 0;
+}
+
+.theme-desc {
+    font-size: 1.2rem;
+    font-weight: 200;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+
+.theme-desc span {
+    color: var(--nigeria-green);
+    font-weight: 600;
+}
+
+/* The Button - Pure Luxury */
+.cinematic-btn {
+    margin-top: 50px;
+    position: relative;
+    padding: 20px 60px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.cinematic-btn:hover {
+    border-color: var(--nigeria-green);
+    box-shadow: 0 0 40px rgba(0, 135, 81, 0.4);
+}
+
+.btn-flare {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: 0.5s;
+}
+
+.cinematic-btn:hover .btn-flare {
+    left: 100%;
+}
+
+.event-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.meta-box span {
+    font-size: 9px;
+    color: var(--nigeria-green);
+    letter-spacing: 3px;
+}
+
+.meta-box p { font-size: 1.5rem; font-weight: 600; }
+
+.location-bar {
+    font-size: 10px;
+    letter-spacing: 3px;
+    opacity: 0.6;
+    text-align: center;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+
+
+/* Registration Page Specifics */
+.register-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.content-wrapper {
+    z-index: 2;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+/* Countdown Styles */
+.countdown-container {
+    margin-bottom: 50px;
+}
+
+.section-label {
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--nigeria-green);
+    margin-bottom: 20px;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.time-block span {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 8vw, 4rem);
+    display: block;
+    color: var(--pearl);
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.time-block p {
+    font-size: 10px;
+    letter-spacing: 2px;
+    opacity: 0.6;
+}
+
+/* Glassmorphism Form */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 50px 40px;
+    border-radius: 2px;
+}
+
+.glass-card h3 {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+}
+
+.input-field {
+    position: relative;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.input-field input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 0;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-field label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    opacity: 0.5;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+}
+
+.input-field input:focus ~ label,
+.input-field input:valid ~ label {
+    top: -20px;
+    font-size: 0.7rem;
+    color: var(--nigeria-green);
+    opacity: 1;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 20px;
+    background: var(--nigeria-green);
+    border: none;
+    color: white;
+    letter-spacing: 3px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.submit-btn:hover {
+    background: #00a866;
+    box-shadow: 0 0 30px rgba(0, 168, 102, 0.4);
+}
+
+.inquiry-footer {
+    margin-top: 40px;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.phone-link {
+    color: var(--nigeria-green);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: block;
+    margin-top: 10px;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAINOS | Registration Portal</title>
+    <link rel="stylesheet" href="register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;900&family=Montserrat:wght@100;300;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Atmospheric Overlay -->
+    <div class="cinematic-overlay"></div>
+    <canvas id="fogCanvas"></canvas>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-hint">
+        <p>SCROLL TO REGISTER</p>
+        <div class="mouse-icon"></div>
+    </div>
+
+    <main id="main-scroll">
+        <!-- Section 1: The Massive Countdown -->
+        <section class="screen-section" id="hero-countdown">
+            <div class="content-box">
+                <h2 class="top-label">THE SHIFT BEGINS IN</h2>
+                <div id="countdown-timer">
+                    <div class="t-unit"><span id="days">00</span><p>DAYS</p></div>
+                    <div class="t-unit"><span id="hours">00</span><p>HOURS</p></div>
+                    <div class="t-unit"><span id="minutes">00</span><p>MINUTES</p></div>
+                    <div class="t-unit"><span id="seconds">00</span><p>SECONDS</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Why (Insight) -->
+        <section class="screen-section" id="insight">
+            <div class="insight-content">
+                <h3 class="gold-text">WHY REGISTER?</h3>
+                <p class="insight-text">
+                    This is more than an event; it is a <span>divine mandate</span>. 
+                    By registering, you are positioning yourself within the intercessory grid 
+                    for the birth of a new Nigeria. Secure your access to exclusive 
+                    information, prayer sessions, and the KAINOS community hub.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: The Portal (Form) -->
+        <section class="screen-section" id="form-section">
+            <div class="registration-portal">
+                <h2 class="portal-title">REGISTRATION PORTAL</h2>
+                
+                <!-- FormSubmit Implementation -->
+                <!-- Replace 'your-email@example.com' with your actual email address -->
+                <form id="kainosForm" action="https://formsubmit.co/youngrevivalistacademy01@gmail.com" method="POST">
+                    
+                    <!-- Form Settings -->
+                    <input type="hidden" name="_subject" value="New KAINOS Festival Registration!">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" style="display:none">
+
+                    <div class="input-wrapper">
+                        <input type="text" id="name" name="Full Name" required placeholder=" ">
+                        <label>FULL NAME</label>
+                    </div>
+                    
+                    <div class="input-wrapper">
+                        <input type="tel" id="phone" name="WhatsApp Number" required placeholder=" ">
+                        <label>WHATSAPP NUMBER</label>
+                    </div>
+
+                    <button type="submit" class="glory-btn">
+                        <span>REGISTER</span>
+                    </button>
+                </form>
+                
+                <!-- Contact Info -->
+                <div class="contact-footer" style="margin-top: 40px; font-size: 11px; letter-spacing: 2px;">
+                    <p style="opacity: 0.6;">FOR INQUIRIES, DONATION OR CONTACT:</p>
+                    <a href="tel:+2348094929003" style="color: #008751; text-decoration: none; font-weight: 600; font-size: 1.1rem; display: block; margin-top: 10px;">+234 809 492 9003</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="register.js"></script>
+</body>
+</html>
