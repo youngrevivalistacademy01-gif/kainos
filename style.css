@@ -1,290 +1,106 @@
 :root {
-    --deep-emerald: #002e1a;
-    --nigeria-green: #008751;
-    --pearl: #fdfdfd;
-    --gold-glow: rgba(212, 175, 55, 0.3);
+    --primary-green: #008751;
+    --deep-forest: #011a10;
+    --white: #f4f4f4;
+    --glass: rgba(255, 255, 255, 0.03);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-    background-color: var(--deep-emerald);
+    background-color: var(--deep-forest);
+    color: var(--white);
     font-family: 'Montserrat', sans-serif;
-    color: var(--pearl);
-    overflow: hidden; /* We'll control scroll via JS or keep it single-page cinematic */
+    overflow-x: hidden;
 }
 
-#particleCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Loader Logic */
+/* 1. PROFESSIONAL LOADER */
 .loader {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+    position: fixed; inset: 0; background: #000; z-index: 1000;
+    display: flex; justify-content: center; align-items: center;
+    transition: clip-path 1s cubic-bezier(0.8, 0, 0.2, 1);
+    clip-path: circle(150% at 50% 50%);
 }
+.loader.fade-out { clip-path: circle(0% at 50% 50%); }
+.loader-title { font-family: 'Cinzel'; font-size: 2rem; letter-spacing: 15px; color: var(--primary-green); }
+.loader-year { font-size: 10px; letter-spacing: 5px; margin-top: 10px; opacity: 0.5; }
+.line { width: 0; height: 1px; background: var(--white); margin: 10px auto; animation: grow 1.5s forwards; }
 
-.loader-title {
-    font-family: 'Cinzel', serif;
-    font-size: 4rem;
-    letter-spacing: 20px;
-    margin-top: 20px;
-    opacity: 0;
-    animation: fadeIn 1.5s forwards 0.5s;
-}
+@keyframes grow { to { width: 100px; } }
 
-/* Hero UI */
+/* 2. HERO LAYOUT */
 .hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px;
-    z-index: 1;
-    position: relative;
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: space-between; padding: 30px; position: relative;
 }
 
+header {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: clamp(7px, 2vw, 9px); font-weight: 900; letter-spacing: 3px; z-index: 10;
+}
+.green-glow { color: var(--primary-green); text-shadow: 0 0 10px var(--primary-green); }
+
+.hero-main {
+    flex: 1; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+}
+
+.eyebrow { 
+    font-size: clamp(9px, 3vw, 12px); letter-spacing: 8px; 
+    color: var(--primary-green); margin-bottom: 20px; 
+}
+
+.title-container { position: relative; }
+.glitch-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(4rem, 20vw, 13rem);
+    line-height: 0.8; font-weight: 900;
+}
+.year-marker {
+    position: absolute; top: -10px; right: 0;
+    font-size: clamp(10px, 3vw, 16px); color: var(--primary-green); font-weight: 900;
+}
+
+.theme-desc { 
+    font-weight: 100; font-size: clamp(0.8rem, 4vw, 1.2rem); 
+    letter-spacing: 4px; margin-top: 20px; 
+}
+.theme-desc span { font-weight: 900; color: var(--primary-green); border-bottom: 1px solid var(--white); }
+
+/* 3. META DATA */
+.event-meta { display: flex; gap: 40px; margin: 50px 0; }
+.meta-box span { font-size: 8px; color: var(--primary-green); letter-spacing: 3px; display: block; margin-bottom: 8px; }
+.meta-box p { font-family: 'Cinzel'; font-size: clamp(1rem, 5vw, 1.5rem); font-weight: 700; }
+
+/* 4. THE ACTION BUTTON */
+.cinematic-btn {
+    text-decoration: none; color: var(--white);
+    padding: 25px 60px; border: 1px solid var(--white);
+    font-size: 11px; font-weight: 900; letter-spacing: 6px;
+    position: relative; transition: 0.4s; overflow: hidden;
+}
+.cinematic-btn:hover {
+    background: var(--white); color: var(--deep-forest);
+    box-shadow: 0 0 50px rgba(255,255,255,0.2);
+}
+
+/* 5. FOOTER */
+.location-bar {
+    text-align: center; font-size: clamp(7px, 2vw, 9px); 
+    letter-spacing: 2px; padding: 20px; opacity: 0.4;
+}
+
+/* 6. PARTICLES & FX */
+#particleCanvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
 .vignette {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
     pointer-events: none;
 }
 
-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    text-transform: uppercase;
-    font-size: 10px;
-    letter-spacing: 4px;
-    font-weight: 600;
-}
-
-.hero-main {
-    text-align: center;
-    z-index: 2;
-}
-
-.glitch-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(5rem, 18vw, 12rem);
-    letter-spacing: 30px;
-    color: var(--pearl);
-    text-shadow: 0 0 30px var(--gold-glow);
-    margin: 20px 0;
-}
-
-.theme-desc {
-    font-size: 1.2rem;
-    font-weight: 200;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-}
-
-.theme-desc span {
-    color: var(--nigeria-green);
-    font-weight: 600;
-}
-
-/* The Button - Pure Luxury */
-.cinematic-btn {
-    margin-top: 50px;
-    position: relative;
-    padding: 20px 60px;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-    overflow: hidden;
-    transition: 0.5s;
-}
-
-.cinematic-btn:hover {
-    border-color: var(--nigeria-green);
-    box-shadow: 0 0 40px rgba(0, 135, 81, 0.4);
-}
-
-.btn-flare {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transition: 0.5s;
-}
-
-.cinematic-btn:hover .btn-flare {
-    left: 100%;
-}
-
-.event-meta {
-    display: flex;
-    gap: 40px;
-    justify-content: center;
-    margin-top: 40px;
-}
-
-.meta-box span {
-    font-size: 9px;
-    color: var(--nigeria-green);
-    letter-spacing: 3px;
-}
-
-.meta-box p { font-size: 1.5rem; font-weight: 600; }
-
-.location-bar {
-    font-size: 10px;
-    letter-spacing: 3px;
-    opacity: 0.6;
-    text-align: center;
-}
-
-@keyframes fadeIn { to { opacity: 1; } }
-
-
-
-/* Registration Page Specifics */
-.register-page {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.content-wrapper {
-    z-index: 2;
-    width: 100%;
-    max-width: 800px;
-    text-align: center;
-}
-
-/* Countdown Styles */
-.countdown-container {
-    margin-bottom: 50px;
-}
-
-.section-label {
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: var(--nigeria-green);
-    margin-bottom: 20px;
-}
-
-#countdown {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
-.time-block span {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(2rem, 8vw, 4rem);
-    display: block;
-    color: var(--pearl);
-    text-shadow: 0 0 20px rgba(255,255,255,0.3);
-}
-
-.time-block p {
-    font-size: 10px;
-    letter-spacing: 2px;
-    opacity: 0.6;
-}
-
-/* Glassmorphism Form */
-.glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 50px 40px;
-    border-radius: 2px;
-}
-
-.glass-card h3 {
-    font-family: 'Cinzel', serif;
-    letter-spacing: 5px;
-    margin-bottom: 40px;
-    font-size: 1.2rem;
-}
-
-.input-field {
-    position: relative;
-    margin-bottom: 40px;
-    text-align: left;
-}
-
-.input-field input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    padding: 10px 0;
-    color: white;
-    font-size: 1rem;
-    outline: none;
-}
-
-.input-field label {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    pointer-events: none;
-    transition: 0.3s;
-    opacity: 0.5;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-}
-
-.input-field input:focus ~ label,
-.input-field input:valid ~ label {
-    top: -20px;
-    font-size: 0.7rem;
-    color: var(--nigeria-green);
-    opacity: 1;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 20px;
-    background: var(--nigeria-green);
-    border: none;
-    color: white;
-    letter-spacing: 3px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.4s;
-}
-
-.submit-btn:hover {
-    background: #00a866;
-    box-shadow: 0 0 30px rgba(0, 168, 102, 0.4);
-}
-
-.inquiry-footer {
-    margin-top: 40px;
-    font-size: 11px;
-    letter-spacing: 1px;
-}
-
-.phone-link {
-    color: var(--nigeria-green);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    display: block;
-    margin-top: 10px;
+/* MOBILE FIXES */
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 10px; }
+    .hero { padding: 20px; }
+    .event-meta { gap: 20px; }
 }
